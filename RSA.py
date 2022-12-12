@@ -39,8 +39,8 @@ def decrypt(mod, d, encrypted_text):
 
 def main():
     #print('Введите текст для шифрования:')
-    f = open('text.txt')
-    phrase = f.read()
+    with open('text.txt') as f:
+        phrase = f.read()
     print('Введите два простых числа:')
     p, q = map(int, input().split())
     e, mod, d = keys(p, q)

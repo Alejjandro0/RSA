@@ -1,14 +1,16 @@
 import math
 
-#Введите то, что хотите зашифровать в файл plaintext.txt
-#Введите числа зашифрованного сообщения в ciphertext.txt через пробел для расшифрования
+'''
+Введите то, что хотите зашифровать в файл plaintext.txt
+Введите числа зашифрованного сообщения в ciphertext.txt через пробел для расшифрования
+'''
 
 def prime(j):
     k = 0
     for i in range(1, j+1):
         if j % i == 0:
-            k+=1
-    if k<=2:
+            k += 1
+    if k <= 2:
         return j
 
 def keys(p, q):
@@ -40,7 +42,8 @@ def encrypt(e, mod, phrase):
 
 def decrypt(d, mod, phrase):
     decrypted_list = []
-    arr = phrase.split(' ')
+    phrase_2 = phrase[1: -1]
+    arr = phrase_2.split(', ')
     for i in range(len(arr)):
         arr[i] = int(arr[i])
     for i in range(len(arr)):
@@ -51,30 +54,41 @@ def decrypt(d, mod, phrase):
     return decrypted_text
 
 def main():
-    #print('Введите текст для шифрования:')
     print('0 - Шифрование, 1 - Расшифрование')
     t = int(input())
     if t == 0:
-        with open('plaintext.txt') as f:
-            phrase = f.read()
-        print('Введите два простых числа:')
-        p, q = map(int, input().split())
-        if not prime(p):
-            raise TypeError(f'Число {p} не простое')
-        if not prime(q):
-            raise TypeError(f'Число {q} не простое')
-        e, mod, d = keys(p, q)
-        print(f'Открытый ключ: ({e}, {mod})')
-        print(f'Закрытый ключ: {d}')
-        encrypted_list = encrypt(e, mod, phrase)
-        print(f'Зашифрованное сообщение:\n {encrypted_list}')
+        print('0 - Шифрование с генерацией ключевой пары с помощью простых чисел, 1 - Шифрование с помощью ключевой пары')
+        tt = int(input())
+        if tt == 0:
+            with open('plaintext.txt') as f:
+                phrase = f.read()
+            print('Введите два простых числа:')
+            p, q = map(int, input().split())
+            if not prime(p):
+                raise TypeError(f'Число {p} не простое')
+            if not prime(q):
+                raise TypeError(f'Число {q} не простое')
+            e, mod, d = keys(p, q)
+            print(f'Открытый ключ: ({e}, {mod})')
+            print(f'Закрытый ключ: {d}')
+            encrypted_list = encrypt(e, mod, phrase)
+            print(f'Зашифрованное сообщение:\n {encrypted_list}')
+        if tt == 1:
+            with open('plaintext.txt') as f:
+                phrase = f.read()
+            print('Введите открытый ключ:')
+            e, mod = map(int, input().split())
+            print('Введите закрытый ключ:')
+            d = int(input())
+            encrypted_list = encrypt(e, mod, phrase)
+            print(f'Зашифрованное сообщение:\n {encrypted_list}')
     if t == 1:
         with open('ciphertext.txt', 'r') as f:
             phrase = f.read()
-        print('Введите ваш закрытый ключ:')
+        print('Введите закрытый ключ:')
         d = int(input())
-        print('Введите N из открытого ключа:')
-        mod = int(input())
+        print('Введите открытый ключ:')
+        e, mod = map(int, input().split())
         decrypted_text = decrypt(d, mod, phrase) #(13, 21583) 1637
         print(f'Расшифрованное сообщение:\n {decrypted_text}')
 

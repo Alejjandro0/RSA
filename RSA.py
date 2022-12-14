@@ -3,6 +3,14 @@ import math
 #Введите то, что хотите зашифровать в файл plaintext.txt
 #Введите числа зашифрованного сообщения в ciphertext.txt через пробел для расшифрования
 
+def prime(j):
+    k = 0
+    for i in range(1, j+1):
+        if j % i == 0:
+            k+=1
+    if k<=2:
+        return j
+
 def keys(p, q):
     mod = p * q
     fi = (p - 1) * (q - 1)
@@ -22,6 +30,7 @@ def keys(p, q):
 
 def encrypt(e, mod, phrase):
     encrypted_list = []
+    test = []
     for i in range(len(phrase)):
         encrypted_list.append(((ord(phrase[i])**e) % mod))
     encrypted_text = ''
@@ -50,6 +59,10 @@ def main():
             phrase = f.read()
         print('Введите два простых числа:')
         p, q = map(int, input().split())
+        if not prime(p):
+            raise TypeError(f'Число {p} не простое')
+        if not prime(q):
+            raise TypeError(f'Число {q} не простое')
         e, mod, d = keys(p, q)
         print(f'Открытый ключ: ({e}, {mod})')
         print(f'Закрытый ключ: {d}')

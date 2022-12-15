@@ -5,6 +5,7 @@ import math
 Введите числа зашифрованного сообщения в ciphertext.txt через пробел для расшифрования
 '''
 
+
 def prime(j):
     k = 0
     for i in range(1, j+1):
@@ -34,7 +35,6 @@ def keys(p, q):
 
 def encrypt(e, mod, phrase):
     encrypted_list = []
-
     for i in range(len(phrase)):
         encrypted_list.append(((ord(phrase[i])**e) % mod))
     return encrypted_list
@@ -107,7 +107,7 @@ def main():
         d = int(input())
         print('Введите открытый ключ:')
         e, mod = map(int, input().split())
-        decrypted_text = decrypt(d, mod, phrase) #(13, 21583) 1637
+        decrypted_text = decrypt(d, mod, phrase)  # (13, 21583) 1637
         print(f'Расшифрованное сообщение:\n {decrypted_text}')
 
 

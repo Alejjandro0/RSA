@@ -64,9 +64,15 @@ def decrypt(d, mod, phrase):
 def main():
     print('0 - Шифрование, 1 - Расшифрование')
     t = int(input())
+    if t != 1 and t != 0:
+        print('Введите корректный номер')
+        return
     if t == 0:
         print('0 - Шифрование с генерацией ключевой пары с помощью простых чисел, 1 - Шифрование с помощью ключевой пары')
         tt = int(input())
+        if tt != 1 and tt != 0:
+            print('Введите корректный номер')
+            return
         if tt == 0:
             with open('plaintext.txt') as f:
                 phrase = f.read()

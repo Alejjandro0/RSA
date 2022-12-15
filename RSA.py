@@ -35,10 +35,13 @@ def encrypt(e, mod, phrase):
     test = []
     for i in range(len(phrase)):
         encrypted_list.append(((ord(phrase[i])**e) % mod))
+    return encrypted_list
+
+def encrypt_in_symbol(encrypted_list):
     encrypted_text = ''
     for j in range(len(encrypted_list)):
         encrypted_text += chr(encrypted_list[j])
-    return encrypted_list
+    return encrypted_text
 
 def decrypt(d, mod, phrase):
     decrypted_list = []
@@ -72,7 +75,9 @@ def main():
             print(f'Открытый ключ: ({e}, {mod})')
             print(f'Закрытый ключ: {d}')
             encrypted_list = encrypt(e, mod, phrase)
+            encrypted_text = encrypt_in_symbol(encrypted_list)
             print(f'Зашифрованное сообщение:\n {encrypted_list}')
+            print(f'Зашифрованное сообщение символами:\n {encrypted_text}')
         if tt == 1:
             with open('plaintext.txt') as f:
                 phrase = f.read()
@@ -81,7 +86,9 @@ def main():
             print('Введите закрытый ключ:')
             d = int(input())
             encrypted_list = encrypt(e, mod, phrase)
+            encrypted_text = encrypt_in_symbol(encrypted_list)
             print(f'Зашифрованное сообщение:\n {encrypted_list}')
+            print(f'Зашифрованное сообщение символами:\n {encrypted_text}')
     if t == 1:
         with open('ciphertext.txt', 'r') as f:
             phrase = f.read()

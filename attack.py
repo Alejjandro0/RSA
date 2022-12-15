@@ -1,16 +1,21 @@
 import math
 
+
 def sqrt_n(mod):
     N = math.ceil(math.sqrt(mod))
     return N
+
 
 def check(N, mod):
     for N2 in range(N, mod):
         if int(math.sqrt(abs(N2 ** 2 - mod))) == math.sqrt(abs(N2 ** 2 - mod)):
             return N2
+
+
 def V(N2, mod):
     V = math.sqrt(abs(N2 ** 2 - mod))
     return V
+
 
 def keys(p, q, e):
     mod = p * q
@@ -27,6 +32,7 @@ def keys(p, q, e):
             d = i
             break
     return d
+
 
 def main():
     print('Давайте вычислим квадратный корень от n из открытого ключа и округлим его вверх к ближайшему целому значению')
@@ -47,6 +53,7 @@ def main():
           f' {p} * {q} = {pq}')
     d = keys(p, q, e)
     print(f'В итоге получаем закрытый ключ d = {d}')
+
 
 if __name__ == '__main__':
     main()
